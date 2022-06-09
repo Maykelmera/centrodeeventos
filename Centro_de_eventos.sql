@@ -9,11 +9,12 @@
 /*==============================================================*/
 create table ARBITRO (
    ID_ARBITRO           SERIAL               not null,
-   NOMBRE_ARBITRO       VARCHAR(30)          not null,
-   APELLIDO_ARBITRO     VARCHAR(30)          not null,
-   NCEDULA_ARBITRO      VARCHAR(10)          not null,
-   DIRECCION_ARBITRO    VARCHAR(30)          not null,
-   NTELEFONO_ARBITRO    VARCHAR(10)          not null,
+   NOMBRE_ARBITRO       CHAR(30)             null,
+   APELLIDO_ARBITRO     CHAR(30)             null,
+   NCEDULA_ARBITRO      CHAR(10)             null,
+   DIRECCION_ARBITRO    CHAR(30)             null,
+   NTELEFONO_ARBITRO    CHAR(10)             null,
+   CORREO_ARBITRO       CHAR(30)             null,
    constraint PK_ARBITRO primary key (ID_ARBITRO)
 );
 
@@ -23,10 +24,10 @@ create table ARBITRO (
 create table CAMPEONATO (
    ID_CAMPEONATO        SERIAL               not null,
    ID_CENTRODEEVENTO    INT4                 not null,
-   TIPO_CAMPEONATO      VARCHAR(30)          not null,
-   TIPO_EVENTODEPORTIVO VARCHAR(30)          not null,
-   FECHAINICIO_CAMPEONATO DATE                 not null,
-   FECHAFIN_CAMPEONATO  DATE                 not null,
+   TIPO_CAMPEONATO      CHAR(25)             null,
+   TIPO_EVENTODEPORTIVO CHAR(30)             null,
+   FECHAINICIO_CAMPEONATO DATE                 null,
+   FECHAFIN_CAMPEONATO  DATE                 null,
    constraint PK_CAMPEONATO primary key (ID_CAMPEONATO)
 );
 
@@ -35,11 +36,11 @@ create table CAMPEONATO (
 /*==============================================================*/
 create table CENTRO_DE_EVENTO (
    ID_CENTRODEEVENTO    SERIAL               not null,
-   NOMBRE_CENTRODEEVENTO VARCHAR(30)          not null,
-   DIRECCION_CENTRODEEVENTO VARCHAR(30)          not null,
-   TELEFONO_CENTRODEEVENTO VARCHAR(10)          not null,
-   CORREO_CENTRODEEVENTO VARCHAR(30)          not null,
-   PWEB_CENTRODEEVENTO  VARCHAR(30)          not null,
+   NOMBRE_CENTRODEEVENTO CHAR(30)             null,
+   DIRECCION_CENTRODEEVENTO CHAR(30)             null,
+   TELEFONO_CENTRODEEVENTO CHAR(10)             null,
+   CORREO_CENTRODEEVENTO CHAR(30)             null,
+   PWEB_CENTRODEEVENTO  CHAR(50)             null,
    constraint PK_CENTRO_DE_EVENTO primary key (ID_CENTRODEEVENTO)
 );
 
@@ -48,12 +49,13 @@ create table CENTRO_DE_EVENTO (
 /*==============================================================*/
 create table CLIENTE_RESERVADOR (
    ID_CLIENTE           SERIAL               not null,
-   NOMBRE_CLIENTE       VARCHAR(30)          not null,
-   APELLIDO_CLIENTE     VARCHAR(30)          not null,
-   CEDULA_CLIENTE       VARCHAR(10)          not null,
-   FNACIMIENTO_CLIENTE  DATE                 not null,
-   DIRECCION_CLIENTE    VARCHAR(30)          not null,
-   NTELEFONO_CLIENTE    VARCHAR(10)          not null,
+   NOMBRE_CLIENTE       CHAR(30)             null,
+   APELLIDO_CLIENTE     CHAR(30)             null,
+   CEDULA_CLIENTE       CHAR(10)             null,
+   FNACIMIENTO_CLIENTE  DATE                 null,
+   DIRECCION_CLIENTE    CHAR(30)             null,
+   NTELEFONO_CLIENTE    CHAR(10)             null,
+   CORREO_CLIENTE       CHAR(30)             null,
    constraint PK_CLIENTE_RESERVADOR primary key (ID_CLIENTE)
 );
 
@@ -63,15 +65,16 @@ create table CLIENTE_RESERVADOR (
 create table EMPLEADO (
    ID_EMPLEADO          SERIAL               not null,
    ID_CENTRODEEVENTO    INT4                 not null,
-   NOMBRE_EMPLEADO      VARCHAR(30)          not null,
-   APELLIDO_EMPLEADO    VARCHAR(30)          not null,
-   NCEDULA_EMPLEADO     VARCHAR(10)          not null,
-   DIRECCION_EMPLEADO   VARCHAR(30)          not null,
-   FNACIMIENTO_EMPLEADO DATE                 not null,
-   FINGRESO_EMPLEADO    DATE                 not null,
-   ENFERMEDAD_EMPLEADO  VARCHAR(30)          not null,
-   TIPO_EMPLEADO        VARCHAR(30)          not null,
-   NTELEFONO_EMPLEADO   VARCHAR(10)          not null,
+   NOMBRE_EMPLEADO      CHAR(30)             null,
+   APELLIDO_EMPLEADO    CHAR(30)             null,
+   NCEDULA_EMPLEADO     CHAR(10)             null,
+   DIRECCION_EMPLEADO   CHAR(30)             null,
+   FNACIMIENTO_EMPLEADO DATE                 null,
+   FINGRESO_EMPLEADO    DATE                 null,
+   ENFERMEDAD_EMPLEADO  CHAR(30)             null,
+   TIPO_EMPLEADO        CHAR(25)             null,
+   NTELEFONO_EMPLEADO   CHAR(10)             null,
+   CORREO_EMPLEADO      CHAR(30)             null,
    constraint PK_EMPLEADO primary key (ID_EMPLEADO)
 );
 
@@ -81,9 +84,9 @@ create table EMPLEADO (
 create table ESPACIO (
    ID_ESPACIO           SERIAL               not null,
    ID_CENTRODEEVENTO    INT4                 not null,
-   DISPONIBILIDAD_ESPACIO VARCHAR(30)          not null,
-   CAPACIDAD_ESPACIO    NUMERIC(3)           not null,
-   HORARIOR_ESPACIO     VARCHAR(30)          not null,
+   DISPONIBILIDAD_ESPACIO CHAR(25)             null,
+   CAPACIDAD_ESPACIO    NUMERIC(3)           null,
+   HORARIOR_ESPACIO     CHAR(25)             null,
    constraint PK_ESPACIO primary key (ID_ESPACIO)
 );
 
@@ -93,7 +96,7 @@ create table ESPACIO (
 create table REALIZA (
    ID_RESERVACION       INT4                 not null,
    ID_CLIENTE           INT4                 not null,
-   ESTADO               VARCHAR(30)          not null,
+   ESTADO               VARCHAR(30)          null,
    constraint PK_REALIZA primary key (ID_RESERVACION, ID_CLIENTE)
 );
 
@@ -125,8 +128,8 @@ create table ATIENDE (
 create table DIRIGE (
    ID_ARBITRO           INT4                 not null,
    ID_CAMPEONATO        INT4                 not null,
-   COSTO                NUMERIC(3)           not null,
-   OBSERVACION          VARCHAR(30)          not null,
+   COSTO                NUMERIC(3)           null,
+   OBSERVACION          VARCHAR(30)          null,
    constraint PK_DIRIGE primary key (ID_ARBITRO, ID_CAMPEONATO)
 );
 
@@ -136,12 +139,12 @@ create table DIRIGE (
 create table RESERVACION (
    ID_RESERVACION       SERIAL               not null,
    ID_CENTRODEEVENTO    INT4                 not null,
-   NOMBRE_RESERVACION   VARCHAR(30)          not null,
-   TIEMPO_RESERVACION   TIME                 not null,
-   TIPO_EVENTO_RESERVACION VARCHAR(30)          not null,
-   COSTO_RESERVACION    NUMERIC(3)           not null,
-   FECHA_RESERVACION    DATE                 not null,
-   AREA_RESERVACION     VARCHAR(30)          not null,
+   NOMBRE_RESERVACION   CHAR(25)             null,
+   TIEMPO_RESERVACION   TIME                 null,
+   TIPO_EVENTO_RESERVACION CHAR(20)             null,
+   COSTO_RESERVACION    NUMERIC(3)           null,
+   FECHA_RESERVACION    DATE                 null,
+   AREA_RESERVACION     CHAR(30)             null,
    constraint PK_RESERVACION primary key (ID_RESERVACION)
 );
 
@@ -150,7 +153,7 @@ create table RESERVACION (
 /*==============================================================*/
 create table SERVICIO (
    ID_SERVICIO          SERIAL               not null,
-   ACTIVIDAD_SERVICIO   VARCHAR(25)          not null,
+   ACTIVIDAD_SERVICIO   CHAR(25)             null,
    constraint PK_SERVICIO primary key (ID_SERVICIO)
 );
 
@@ -268,11 +271,11 @@ INSERT INTO campeonato (id_campeonato, id_centrodeevento, tipo_campeonato, tipo_
 ---------------------Añadir datos a ESPACIO------------------------
 INSERT INTO espacio (id_espacio, id_centrodeevento, disponibilidad_espacio, capacidad_espacio, horarior_espacio) 
 							   VALUES 
-							   (10256, 25897, 'libre' , 250, 'Lunes 06/06/2022 a las 1pm'),
-							   (12486, 25897, 'Ocupado' , 100, 'Sábado 25/06/2022 a las 5pm'),
-							   (12368, 25897, 'libre' , 220, 'Viernes 08/07/2022 a las 10am'),
-							   (20452, 25897, 'Ocupado' , 350, 'Martes 28/06/2022 a las 9pm'),
-							   (58932, 25897, 'Ocupado' , 180, 'Domingo 12/06/2022 a las 11am');
+							   (10256, 25897, 'libre' , 250, '06/06/2022 a las 1pm'),
+							   (12486, 25897, 'Ocupado' , 100, '25/06/2022 a las 5pm'),
+							   (12368, 25897, 'libre' , 220, '08/07/2022 a las 10am'),
+							   (20452, 25897, 'Ocupado' , 350, '28/06/2022 a las 9pm'),
+							   (58932, 25897, 'Ocupado' , 180, '12/06/2022 a las 11am');
 
 
 
@@ -421,7 +424,7 @@ FROM EFECTUA
 	INNER JOIN CLIENTE_RESERVADOR ON CLIENTE_RESERVADOR.ID_CLIENTE = EFECTUA.ID_CLIENTE
 	INNER JOIN EMPLEADO ON EMPLEADO.ID_EMPLEADO = EFECTUA.ID_EMPLEADO
 	INNER JOIN SERVICIO ON SERVICIO.ID_SERVICIO = EFECTUA.ID_SERVICIO
-	WHERE EFECTUA.ID_SERVICIO > 40000
+	WHERE EFECTUA.ID_SERVICIO > 40000;
 
 
 -----------------------------Cuarta consulta-----------------------------------
@@ -445,4 +448,4 @@ SELECT
 FROM DIRIGE
 	INNER JOIN ARBITRO ON ARBITRO.ID_ARBITRO = DIRIGE.ID_ARBITRO
 	INNER JOIN CAMPEONATO ON CAMPEONATO.ID_CAMPEONATO = DIRIGE.ID_CAMPEONATO
-	WHERE DIRIGE.OBSERVACION LIKE 'D%'
+	WHERE DIRIGE.OBSERVACION LIKE 'D%';
